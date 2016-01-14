@@ -78,14 +78,14 @@ public class EARKParser implements Parser {
           }
           Path filePath = source.resolve(href);
           SIPDescriptiveMetadata sdm;
-          try{
+          try {
             MetadataType mt = MetadataType.valueOf(mdref.getMDTYPE().toUpperCase());
-            LOGGER.debug("Metadata type valid: "+mt.toString());
-            sdm = new SIPDescriptiveMetadata(filePath, null, mt);
-          }catch(NullPointerException | IllegalArgumentException t){
-            sdm = new SIPDescriptiveMetadata(filePath, null, MetadataType.OTHER);
+            LOGGER.debug("Metadata type valid: " + mt.toString());
+            sdm = new SIPDescriptiveMetadata(filePath, null, mt, mdref.getMDTYPEVERSION());
+          } catch (NullPointerException | IllegalArgumentException t) {
+            sdm = new SIPDescriptiveMetadata(filePath, null, MetadataType.OTHER, null);
           }
-          
+
           sip.addDescriptiveMetadata(sdm);
         }
       }
@@ -152,14 +152,14 @@ public class EARKParser implements Parser {
               href = href.replace("file://./", "");
             }
             Path filePath = representationPath.resolve(href);
-            
+
             SIPDescriptiveMetadata sdm;
-            try{
+            try {
               MetadataType mt = MetadataType.valueOf(mdref.getMDTYPE().toUpperCase());
-              LOGGER.debug("Metadata type valid: "+mt.toString());
-              sdm = new SIPDescriptiveMetadata(filePath, null, mt);
-            }catch(NullPointerException | IllegalArgumentException t){
-              sdm = new SIPDescriptiveMetadata(filePath, null, MetadataType.OTHER);
+              LOGGER.debug("Metadata type valid: " + mt.toString());
+              sdm = new SIPDescriptiveMetadata(filePath, null, mt, mdref.getMDTYPEVERSION());
+            } catch (NullPointerException | IllegalArgumentException t) {
+              sdm = new SIPDescriptiveMetadata(filePath, null, MetadataType.OTHER, null);
             }
             sip.addDescriptiveMetadataToRepresentation(representationID, sdm);
           }
